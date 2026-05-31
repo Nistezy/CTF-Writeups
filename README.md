@@ -38,11 +38,10 @@ O principal objetivo deste repositório é:
 O conteúdo está organizado da seguinte forma:
 
 ```
-📁 forensic/
-📁 ctf/
-📁 web/
-📁 network/
-📁 malware/
+📁 Forensic/
+📁 CTFs/
+📁 Malware/
+📁 Web/
 ```
 
 Cada diretório contém writeups detalhados com:
