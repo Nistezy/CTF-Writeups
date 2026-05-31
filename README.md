@@ -13,6 +13,15 @@ Todo o conteúdo aqui apresentado tem caráter **educacional**, visando o desenv
 
 ---
 
+## 🛡️ Cybersecurity Platforms for pratices
+
+[![TryHackMe](https://img.shields.io/badge/TryHackMe-Nistezy160-red?style=for-the-badge&logo=tryhackme&logoColor=white)](https://tryhackme.com/p/Nistezy160)
+[![CyberDefenders](https://img.shields.io/badge/CyberDefenders-DFIR%20Player-101820?style=for-the-badge)](https://cyberdefenders.org/p/Nistezy/)
+[![VulnHub](https://img.shields.io/badge/VulnHub-Practicing-F26422?style=for-the-badge)](https://www.vulnhub.com/)
+[![PortSwigger](https://img.shields.io/badge/PortSwigger-Web_Security_Academy-FF6633?style=for-the-badge&logo=PortSwigger&logoColor=white)](https://portswigger.net/web-security)
+
+---
+
 ## 🎯 Objetivo
 
 O principal objetivo deste repositório é:
@@ -53,7 +62,6 @@ Algumas das ferramentas utilizadas nos estudos:
 * Wireshark
 * NetworkMiner
 * Autopsy
-* Volatility
 * Burp Suite
 * Nmap
 * Metasploit
@@ -66,20 +74,6 @@ Algumas das ferramentas utilizadas nos estudos:
 Todo o conteúdo deste repositório é destinado exclusivamente para fins **educacionais e éticos**.
 
 Qualquer uso indevido das técnicas aqui descritas é de total responsabilidade do usuário.
-
----
-
-## 👨‍💻 Autor
-
-**[Seu Nome Aqui]**
-Estudante de Cibersegurança | Pentest | Forense Digital
-
----
-
-## 🚀 Contato
-
-* LinkedIn: [seu-linkedin]
-* GitHub: [seu-github]
 
 ---
 
