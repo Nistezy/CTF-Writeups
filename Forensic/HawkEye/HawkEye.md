@@ -43,7 +43,7 @@ Um funcionário do departamento financeiro foi vítima de uma campanha de phishi
 ```
 Statistics → Capture File Properties → Pacotes: 4003
 ```
-
+![Total de pacotes](/Forensic/HawkEye/images/How_Many_Packets_Have.png)
 ---
 
 ### Q2 — A que horas foi capturado o primeiro pacote (UTC)?
@@ -55,6 +55,7 @@ Statistics → Capture File Properties → Pacotes: 4003
 ```
 Arrival Time: Apr 10, 2019 17:37:07.129730000 UTC
 ```
+![Horario do primeiro pacote](/Forensic/HawkEye/images/First_Packet_Arrived.png)
 
 A captura foi iniciada às 17h37 UTC do dia 10 de abril de 2019, coincidindo com o momento em que a vítima abriu o e-mail de phishing e disparou a infecção.
 
@@ -69,6 +70,7 @@ A captura foi iniciada às 17h37 UTC do dia 10 de abril de 2019, coincidindo com
 ```
 Elapsed: 01:03:41
 ```
+![Duracao do pacote](/Forensic/HawkEye/images/First_Packet_Duration.png)
 
 Esse período engloba todo o ciclo de infecção: download do malware, execução, coleta de credenciais e múltiplas rodadas de exfiltração via SMTP.
 
@@ -79,6 +81,7 @@ Esse período engloba todo o ciclo de infecção: download do malware, execuçã
 > **Resposta: `00:08:02:1c:47:ae`**
 
 **Solução:** Em *Statistics → Endpoints → Ethernet*, o endereço MAC **`00:08:02:1c:47:ae`** aparece com o maior volume de tráfego: **3.523 pacotes** (39,37% de TX + 47,02% RX). Este endereço pertence ao sistema `BEIJING-5CD1-PC`, a máquina vítima comprometida.
+![Pc com maior nivel no link](/Forensic/HawkEye/images/PC_with_more_active_in_link.png)
 
 ---
 
@@ -87,6 +90,7 @@ Esse período engloba todo o ciclo de infecção: download do malware, execuçã
 > **Resposta: `Hewlett-Packard`**
 
 **Solução:** A pesquisa do prefixo OUI `00:08:02` no banco de dados IEEE revela que este bloco pertence à **Hewlett-Packard Company**. O NetworkMiner identifica automaticamente o fabricante ao analisar o MAC `00:08:02:1c:47:ae`.
+![NIC](/Forensic/HawkEye/images/Manufacturer_of_NIC_Hewlett-Packard.png)
 
 ---
 
@@ -95,6 +99,7 @@ Esse período engloba todo o ciclo de infecção: download do malware, execuçã
 > **Resposta: `Palo Alto`**
 
 **Solução:** A Hewlett-Packard Company foi fundada em 1939 e tem sede histórica em **Palo Alto, Califórnia, EUA**. Confirmado via pesquisa web sobre "Hewlett-Packard location".
+![Locate of NIC](/Forensic/HawkEye/images/Locate_of_manufacturer_NIC.png)
 
 ---
 
@@ -109,6 +114,8 @@ Esse período engloba todo o ciclo de infecção: download do malware, execuçã
 - `10.4.10.2` — Outro host interno
 
 Os demais IPs visíveis na aba Ethernet (como `Netgear_b6:93:f1`, `Broadcast`, `IPv4mcast_*`) são endereços de broadcast/multicast e não representam computadores individuais da organização. Total: **3 computadores**.
+![Organization PCs](/Forensic/HawkEye/images/Computers_in_organization_3.png)
+
 
 ---
 
@@ -122,6 +129,7 @@ Filtro Wireshark utilizado:
 ```
 ip.dst_host == "10.4.10.132"
 ```
+![PC com nivel mais alto](/Forensic/HawkEye/images/Name_of_Computer_if_More_Active.png)
 
 ---
 
@@ -130,6 +138,7 @@ ip.dst_host == "10.4.10.132"
 > **Resposta: `10.4.10.4`**
 
 **Solução:** Filtrando tráfego DNS no Wireshark (`dns`), todas as queries do host `10.4.10.132` são enviadas para o IP **`10.4.10.4`**, que também aparece como servidor DNS nas respostas. O filtro por MAC da vítima (`eth.addr==00:08:02:1c:47:ae && dns`) confirma este comportamento.
+![IP DNS](/Forensic/HawkEye/images/IP_DNS_Server.png)
 
 ---
 
@@ -138,6 +147,7 @@ ip.dst_host == "10.4.10.132"
 > **Resposta: `proforma-invoices.com`**
 
 **Solução:** Navegando diretamente ao pacote 204 no Wireshark (filtro: `dns.qry.name == "proforma-invoices.com"`), observa-se uma **Standard DNS Query do tipo A** para o domínio **`proforma-invoices.com`**. O nome usa engenharia social — "proforma invoice" é documento comercial comum, usado para enganar funcionários financeiros.
+![Domain 204](/Forensic/HawkEye/images/Domain_Name_Packet_204.png)
 
 ---
 
@@ -152,6 +162,7 @@ proforma-invoices.com: type A, class IN, addr 217.182.138.150
 ```
 
 Requisições HTTP subsequentes para download do keylogger são direcionadas para este IP.
+![IP proforma](/Forensic/HawkEye/images/IP_proforma-invoices.com.png)
 
 ---
 
@@ -169,6 +180,7 @@ City:    Roubaix
 ```
 
 O IP pertence à **OVH SAS**, um dos maiores provedores de hosting europeus, com datacenter em Roubaix, **França**. A OVH é frequentemente utilizada por atores maliciosos por oferecer hospedagem de baixo custo na Europa.
+![GEO do Proforma](/Forensic/HawkEye/images/Country_of_the_proforma-invoices.com.png)
 
 ---
 
@@ -183,6 +195,7 @@ Windows NT 6.1
 ```
 
 Confirmado pelo NetworkMiner na aba "Parameters", que exibe o OS fingerprint da máquina. `Windows NT 6.1` corresponde ao **Windows 7**.
+![OS da vitima](/Forensic/HawkEye/images/OS_WindowsNT_6.1.png)
 
 ---
 
@@ -202,6 +215,7 @@ GET /proforma/tkraw_Protected99.exe HTTP/1.1
 ```
 
 O arquivo foi baixado do servidor `217.182.138.150` (proforma-invoices.com) via HTTP na porta 80. O nome `tkraw` é característico do HawkEye Keylogger. O arquivo `.exe` é disfarçado para parecer documento legítimo.
+![Malware baixado](/Forensic/HawkEye/images/Malicious_Archive_Download_by_Victim.png)
 
 ---
 
@@ -216,6 +230,7 @@ MD5: 71826BA081E303866CE2A2534491A2F7
 ```
 
 A verificação no **VirusTotal** confirma a detecção como **HawkEye Keylogger**. O arquivo é um PE32 executável de aproximadamente **2 MB**.
+![MD5 do Malware](/Forensic/HawkEye/images/MD5_Malicious_Archive.png)
 
 ---
 
@@ -230,6 +245,7 @@ Server: LiteSpeed
 ```
 
 O **LiteSpeed Web Server** é um servidor de alto desempenho frequentemente utilizado em hospedagens compartilhadas, onde atacantes alugam espaço para distribuir malware.
+![Software Extrafilacao](/Forensic/HawkEye/images/Software_of_Execute_Web_Server_of_the_Malware.png)
 
 ---
 
@@ -244,6 +260,7 @@ Public IP address 1 : 173.66.146.112
 ```
 
 O keylogger captura e reporta o IP externo da máquina vítima nos logs enviados ao atacante.
+![IP da Vitima](/Forensic/HawkEye/images/Public_IP_of_Victim.png)
 
 ---
 
@@ -261,6 +278,7 @@ City:         Tempe
 ```
 
 O servidor SMTP do atacante está hospedado na infraestrutura da **GoDaddy**, em **Tempe, Arizona — EUA**. O domínio `secureserver.net` é infraestrutura da GoDaddy, frequentemente usada para hospedar servidores de e-mail de baixo custo.
+![Provedor de Email GEO](/Forensic/HawkEye/images/Country_of_the_Email_Provaider_Malware.png)
 
 ---
 
@@ -275,6 +293,7 @@ O servidor SMTP do atacante está hospedado na infraestrutura da **GoDaddy**, em
 ```
 
 **Exim 4.91** é um agente de transferência de e-mail (MTA) open-source amplamente utilizado em servidores Linux. Esta versão possui vulnerabilidades conhecidas (CVE-2019-10149), indicando servidor desatualizado.
+![Exim](/Forensic/HawkEye/images/Software_Used_for_Extrafilation_Data.png)
 
 ---
 
@@ -289,6 +308,7 @@ RCPT TO:<sales.del@macwinlogistics.in>
 ```
 
 Este é o e-mail do operador do ataque, configurado no HawkEye como destino para os logs de keylogging e credenciais roubadas.
+![sales.del@macwinlogistics.in](/Forensic/HawkEye/images/Email_of_Steling_Informations.png)
 
 ---
 
@@ -304,12 +324,13 @@ Decoded: Sales@23
 ```
 
 Estas credenciais hardcoded são características do HawkEye — o malware traz embutidas as informações do servidor SMTP do operador.
+![Senha do Email Hacker](/Forensic/HawkEye/images/Password_Used_for_Send_Emails.png)
 
 ---
 
 ### Q22 — Qual variante do malware exfiltrou os dados?
 
-> **Resposta: `HawkEye Keylogger — Reborn v9`**
+> **Resposta: `Reborn v9`**
 
 **Solução:** O subject dos e-mails SMTP exfiltrados e o conteúdo decodificado via CyberChef (Base64 → texto) revelam:
 
@@ -320,12 +341,13 @@ roman.mcguire \ BEIJING-5CD1-PC
 ```
 
 A análise do hash no VirusTotal confirma a família **HawkEye Keylogger**, variante **Reborn v9**.
+![Variante do Exim](/Forensic/HawkEye/images/Variant_Exim.png)
 
 ---
 
 ### Q23 — Quais são as credenciais de acesso ao Bank of America?
 
-> **Resposta: `roman.mcguire : P@ssw0rd$`**
+> **Resposta: `roman.mcguire:P@ssw0rd$`**
 
 **Solução:** O corpo dos e-mails SMTP exfiltrados contém os logs em Base64. Decodificando no CyberChef, identifica-se:
 
@@ -337,6 +359,7 @@ Password     : P@ssw0rd$
 ```
 
 Essas credenciais foram capturadas pelo keylogger enquanto o usuário acessava sua conta bancária no Chrome.
+![Bankofamerica](/Forensic/HawkEye/images/User_and_Password_of_the_Bankofamerica.png)
 
 ---
 
@@ -357,6 +380,7 @@ Essas credenciais foram capturadas pelo keylogger enquanto o usuário acessava s
 ```
 
 O HawkEye possui um temporizador configurável (padrão: 10 min) que dispara o envio de e-mail com os logs acumulados. Na captura de ~63 minutos foram observados **~7 ciclos** de exfiltração completos.
+![Time of extrafilacao ocorre](/Forensic/HawkEye/images/Diference_betwen_250ok-250ok=10min.png)
 
 ---
 
@@ -447,8 +471,8 @@ O HawkEye possui um temporizador configurável (padrão: 10 min) que dispara o e
 | Q19 | Software servidor SMTP | `Exim 4.91` |
 | Q20 | E-mail de exfiltração | `sales.del@macwinlogistics.in` |
 | Q21 | Senha SMTP do malware | `Sales@23` |
-| Q22 | Variante do malware | `HawkEye Keylogger — Reborn v9` |
-| Q23 | Credenciais Bank of America | `roman.mcguire : P@ssw0rd$` |
+| Q22 | Variante do malware | `Reborn v9` |
+| Q23 | Credenciais Bank of America | `roman.mcguire:P@ssw0rd$` |
 | Q24 | Intervalo de exfiltração | `10 minutos` |
 
 ---
@@ -463,4 +487,3 @@ O HawkEye possui um temporizador configurável (padrão: 10 min) que dispara o e
 - [CyberChef](https://gchq.github.io/CyberChef/)
 
 ---
-*Writeup elaborado por Mauricio Robert — Faculdade Impacta | Junho 2026*
