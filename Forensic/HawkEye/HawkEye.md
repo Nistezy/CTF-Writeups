@@ -463,5 +463,4 @@ O HawkEye possui um temporizador configurável (padrão: 10 min) que dispara o e
 - [CyberChef](https://gchq.github.io/CyberChef/)
 
 ---
-
 *Writeup elaborado por Mauricio Robert — Faculdade Impacta | Junho 2026*
