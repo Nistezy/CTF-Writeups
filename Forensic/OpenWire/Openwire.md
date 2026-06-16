@@ -50,6 +50,8 @@ A análise forense de rede da captura **`c119-OpenWire.pcap`** revelou a explora
 
 Como **146.190.21.92** foi quem originou a conexão em direção ao nosso broker (e, em seguida, enviou o pacote OpenWire malformado que desencadeou a exploração), ele foi identificado como o **IP do servidor C2 primário**.
 
+![IP do C2](/Forensic/OpenWire/images/C2_IP_Server(1).png)
+
 ---
 
 ### Q2 — Qual é o número da porta do serviço que o adversário explorou?
@@ -66,6 +68,8 @@ OpenWire (WireFormatInfo)
     Version: 12
 ```
 
+![Porta Explorada](/Forensic/OpenWire/images/Port_Explored(2).png)
+
 ---
 
 ### Q3 — Qual é o nome do serviço considerado vulnerável?
@@ -81,6 +85,8 @@ Entry: PlatformDetails → String: "Java"
 ```
 
 Confirmando o serviço como **Apache ActiveMQ**, versão **5.18.0** — build que se encontra dentro da faixa de versões afetadas pela CVE-2023-46604 (até 5.15.15 / 5.16.6 / 5.17.5 / **5.18.2**).
+
+![Serviço Vulneravel](/Forensic/OpenWire/images/Vulnerable_Service(3).png)
 
 ---
 
@@ -100,6 +106,8 @@ Incoming sessions: 1
 ```
 
 Esse segundo endereço, distinto do primeiro C2 e usado em uma etapa posterior da cadeia de ataque (download do payload final), foi identificado como o **segundo servidor C2**.
+
+![IP do Segundo C2](/Forensic/OpenWire/images/Another_C2_Server(4).png)
 
 ---
 
@@ -127,6 +135,8 @@ Rótulo:  trojan.shellcode/connectback
 Famílias: shellcode · connectback · metasploit
 ```
 
+![Executavel do Reverse Shell](/Forensic/OpenWire/images/Reverse_Shell_Archive(5).png)
+
 ---
 
 ### Q6 — Qual classe Java foi utilizada no arquivo XML para executar o exploit?
@@ -152,6 +162,8 @@ Famílias: shellcode · connectback · metasploit
 
 Ao carregar esse XML, o Spring instancia o bean `pb` da classe **`java.lang.ProcessBuilder`** e, por conta do atributo `init-method="start"`, invoca imediatamente o método `start()` — executando o comando definido na lista de argumentos do construtor e concretizando a execução remota de código no broker.
 
+![Class Java no XML](/Forensic/OpenWire/images/Class_of_Java_.xlm(6).png)
+
 ---
 
 ### Q7 — Tendo identificado a vulnerabilidade explorada, qual é o número de CVE associado a ela?
@@ -173,6 +185,8 @@ Correção:  Versões 5.15.16, 5.16.7, 5.17.6 ou 5.18.3
 
 A vulnerabilidade permite que um atacante remoto, com acesso de rede ao broker, manipule os tipos de classe serializados no protocolo OpenWire para fazer com que o broker instancie qualquer classe disponível em seu *classpath* — exatamente o comportamento observado nos pacotes `WireFormatInfo`/`ExceptionResponse` capturados na Q1, que abusam do método `BaseDataStreamMarshaller.createThrowable()` para instanciar classes como `org.springframework.context.support.ClassPathXmlApplicationContext`, apontando para a URL maliciosa `http://146.190.21.92:8000/invoice.xml`.
 
+![CVE Openwire](/Forensic/OpenWire/images/CVE_Explored(7).png)
+
 ---
 
 ### Q8 — Qual classe e método Java implementam a etapa de validação adicionada pela correção, para garantir que apenas classes válidas (que estendem `Throwable`) possam ser instanciadas?
@@ -190,6 +204,8 @@ public static void validateIsThrowable(Class<?> clazz) {
 ```
 
 Esse método passou a ser chamado dentro de `BaseDataStreamMarshaller.createThrowable()` — o mesmo método abusado na exploração original — imediatamente após a chamada insegura `Class.forName(className)` e antes de qualquer instanciação via reflexão, eliminando a possibilidade de instanciar classes arbitrárias que não sejam exceções legítimas. Para validar o entendimento da lógica do patch, foi reproduzido um exemplo simplificado em Java (`Demo.java`) replicando o padrão de validação por reflexão antes da correção ser aplicada ao broker.
+
+![Stage of Validation](/Forensic/OpenWire/images/Stage_of_Validation(8).png)
 
 ---
 
