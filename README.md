@@ -41,7 +41,6 @@ O conteúdo está organizado da seguinte forma:
 📁 Forensic/
 📁 CTFs/
 📁 Malware/
-📁 Web/
 ```
 
 Cada diretório contém writeups detalhados com:
@@ -64,7 +63,7 @@ Algumas das ferramentas utilizadas nos estudos:
 * Burp Suite
 * Nmap
 * Metasploit
-* Kali Linux
+* ArchSec (OS Autoral)
 
 ---
 
