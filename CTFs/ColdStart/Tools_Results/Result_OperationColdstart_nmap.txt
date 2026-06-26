@@ -1,0 +1,125 @@
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-06-25 23:19 -0300
+NSE: Loaded 158 scripts for scanning.
+NSE: Script Pre-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 23:19
+Completed NSE at 23:19, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 23:19
+Completed NSE at 23:19, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 23:19
+Completed NSE at 23:19, 0.00s elapsed
+Initiating Ping Scan at 23:19
+Scanning 10.67.188.131 [4 ports]
+Completed Ping Scan at 23:19, 0.15s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 23:19
+Completed Parallel DNS resolution of 1 host. at 23:19, 0.50s elapsed
+Initiating Connect Scan at 23:19
+Scanning 10.67.188.131 [1000 ports]
+Discovered open port 80/tcp on 10.67.188.131
+Discovered open port 21/tcp on 10.67.188.131
+Discovered open port 22/tcp on 10.67.188.131
+Warning: 10.67.188.131 giving up on port because retransmission cap hit (2).
+Completed Connect Scan at 23:20, 32.84s elapsed (1000 total ports)
+Initiating Service scan at 23:20
+Scanning 3 services on 10.67.188.131
+Completed Service scan at 23:20, 6.30s elapsed (3 services on 1 host)
+Initiating OS detection (try #1) against 10.67.188.131
+Retrying OS detection (try #2) against 10.67.188.131
+Initiating Traceroute at 23:20
+Completed Traceroute at 23:20, 3.01s elapsed
+Initiating Parallel DNS resolution of 2 hosts. at 23:20
+Completed Parallel DNS resolution of 2 hosts. at 23:20, 0.50s elapsed
+NSE: Script scanning 10.67.188.131.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 23:20
+NSE: [ftp-bounce 10.67.188.131:21] PORT response: 500 Illegal PORT command.
+Completed NSE at 23:20, 4.06s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 23:20
+Completed NSE at 23:20, 2.66s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 23:20
+Completed NSE at 23:20, 0.00s elapsed
+Nmap scan report for 10.67.188.131
+Host is up, received echo-reply ttl 62 (0.13s latency).
+Scanned at 2026-06-25 23:19:51 -03 for 53s
+Not shown: 670 closed tcp ports (conn-refused), 327 filtered tcp ports (no-response)
+PORT   STATE SERVICE REASON  VERSION
+21/tcp open  ftp     syn-ack vsftpd 3.0.5
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x    2 ftp      ftp          4096 May 09 23:14 pub
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 192.168.141.198
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 4
+|      vsFTPd 3.0.5 - secure, fast, stable
+|_End of status
+22/tcp open  ssh     syn-ack OpenSSH 9.6p1 Ubuntu 3ubuntu13.16 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 fc:63:cb:4f:50:85:0b:d8:4f:59:ea:f4:dd:0c:ef:8d (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJNcxnRzOlkr6c3vIt1RL4lW60Ma3fmM//SkV5k1V0fFY1R/I9CxGRtF428fxqPJc5u6cA67lo1eWcF86DW4c/w=
+|   256 cb:35:9d:a4:60:53:40:8f:c0:8c:32:92:13:6a:1e:c9 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIIj2xyM0QRsjx4bB0Y2Y5YE2jFKevipNF8/bSi2ZjhX
+80/tcp open  http    syn-ack Gunicorn
+| http-methods: 
+|_  Supported Methods: OPTIONS HEAD GET
+|_http-title: URL Preview - Volt Labs
+|_http-server-header: gunicorn
+Device type: phone|general purpose|specialized
+Running (JUST GUESSING): Linux 4.X|5.X|6.X (96%), Google Android 10.X|11.X|12.X (96%), Adtran embedded (92%)
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:google:android:10 cpe:/o:google:android:11 cpe:/o:google:android:12 cpe:/o:linux:linux_kernel:5 cpe:/o:linux:linux_kernel:6 cpe:/h:adtran:424rg
+OS fingerprint not ideal because: Timing level 5 (Insane) used
+Aggressive OS guesses: Android 10 - 12 (Linux 4.14 - 4.19) (96%), Linux 4.15 - 5.19 (96%), Linux 4.15 (96%), Linux 5.4 - 5.15 (96%), Linux 5.14 - 6.8 (93%), Adtran 424RG FTTH gateway (92%), Android 10 - 11 (Linux 4.9 - 4.14) (92%), Android 12 (Linux 5.4) (92%), Android 9 - 11 (Linux 4.9 - 4.14) (92%), Linux 2.6.32 (92%)
+No exact OS matches for host (test conditions non-ideal).
+TCP/IP fingerprint:
+SCAN(V=7.99%E=4%D=6/25%OT=21%CT=1%CU=30077%PV=Y%DS=3%DC=T%G=N%TM=6A3DE1FC%P=x86_64-pc-linux-gnu)
+SEQ(SP=104%GCD=1%ISR=10B%TI=Z%CI=Z%TS=A)
+SEQ(SP=108%GCD=1%ISR=107%TI=Z%CI=Z%II=I%TS=A)
+OPS(O1=M4E8ST11NW8%O2=M4E8ST11NW8%O3=M4E8NNT11NW8%O4=M4E8ST11NW8%O5=M4E8ST11NW8%O6=M4E8ST11)
+WIN(W1=F4B3%W2=F4B3%W3=F4B3%W4=F4B3%W5=F4B3%W6=F4B3)
+ECN(R=Y%DF=Y%T=40%W=F507%O=M4E8NNSNW8%CC=Y%Q=)
+T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)
+T2(R=N)
+T3(R=N)
+T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)
+T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)
+T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)
+T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)
+U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)
+IE(R=Y%DFI=N%T=40%CD=S)
+
+Uptime guess: 18.508 days (since Sun Jun  7 11:09:05 2026)
+Network Distance: 3 hops
+TCP Sequence Prediction: Difficulty=264 (Good luck!)
+IP ID Sequence Generation: All zeros
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using proto 1/icmp)
+HOP RTT       ADDRESS
+1   206.80 ms 192.168.128.1
+2   ...
+3   207.45 ms 10.67.188.131
+
+NSE: Script Post-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 23:20
+Completed NSE at 23:20, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 23:20
+Completed NSE at 23:20, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 23:20
+Completed NSE at 23:20, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 54.77 seconds
+           Raw packets sent: 63 (5.028KB) | Rcvd: 42 (3.928KB)
