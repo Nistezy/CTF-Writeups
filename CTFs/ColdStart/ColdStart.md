@@ -69,8 +69,6 @@ admin   (Status: 308) [Size: 241] [--> http://10.67.188.131/admin/]
 
 O Gobuster identificou o endpoint `/admin/` redirecionando para `/admin/`. Ao tentar acessar diretamente pelo navegador, a rota retorna erro — ela está protegida para aceitar requisições apenas de `127.0.0.1`.
 
-![Gobuster](/CTFs/ColdStart/Tools_Results/Result_ColdStart_Gobuster.txt)
-
 ---
 
 ### FTP Anônimo — Download do Código-Fonte
