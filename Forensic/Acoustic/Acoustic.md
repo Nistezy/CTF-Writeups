@@ -211,7 +211,7 @@ context=from-trunk
 
 O campo **`secret=1234`** é a senha SIP do ramal 555 — exposta em texto claro na resposta HTTP do painel de administração FreePBX, confirmando o comprometimento total da configuração do PBX.
 
-![Senha](/Forensic/Acoustic/images/Password_of_Account_555(12).png)
+![Senha](/Forensic/Acoustic/images/Password_of_Account_555(10).png)
 
 ---
 
