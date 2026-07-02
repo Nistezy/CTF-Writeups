@@ -1,0 +1,158 @@
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-07-01 21:48 -0300
+NSE: Loaded 158 scripts for scanning.
+NSE: Script Pre-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.00s elapsed
+Initiating Ping Scan at 21:48
+Scanning 10.66.152.41 [4 ports]
+Completed Ping Scan at 21:48, 0.19s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 21:48
+Completed Parallel DNS resolution of 1 host. at 21:48, 0.50s elapsed
+Initiating Connect Scan at 21:48
+Scanning 10.66.152.41 [1000 ports]
+Discovered open port 445/tcp on 10.66.152.41
+Discovered open port 139/tcp on 10.66.152.41
+Discovered open port 80/tcp on 10.66.152.41
+Discovered open port 22/tcp on 10.66.152.41
+Warning: 10.66.152.41 giving up on port because retransmission cap hit (2).
+Completed Connect Scan at 21:48, 14.70s elapsed (1000 total ports)
+Initiating Service scan at 21:48
+Scanning 4 services on 10.66.152.41
+Completed Service scan at 21:48, 11.62s elapsed (4 services on 1 host)
+Initiating OS detection (try #1) against 10.66.152.41
+Retrying OS detection (try #2) against 10.66.152.41
+Initiating Traceroute at 21:48
+Completed Traceroute at 21:48, 3.01s elapsed
+Initiating Parallel DNS resolution of 2 hosts. at 21:48
+Completed Parallel DNS resolution of 2 hosts. at 21:48, 0.50s elapsed
+NSE: Script scanning 10.66.152.41.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 4.93s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.82s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.00s elapsed
+Nmap scan report for 10.66.152.41
+Host is up, received echo-reply ttl 62 (0.12s latency).
+Scanned at 2026-07-01 21:48:04 -03 for 40s
+Not shown: 891 closed tcp ports (conn-refused), 105 filtered tcp ports (no-response)
+PORT    STATE SERVICE     REASON  VERSION
+22/tcp  open  ssh         syn-ack OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 57:8a:da:90:ba:ed:3a:47:0c:05:a3:f7:a8:0a:8d:78 (RSA)
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3hfvTN6e0P9PLtkjW4dy+6vpFSh1PwKRZrML7ArPzhx1yVxBP7kxeIt3lX/qJWpxyhlsQwoLx8KDYdpOZlX5Br1PskO6H66P+AwPMYwooSq24qC/Gxg4NX9MsH/lzoKnrgLDUaAqGS5ugLw6biXITEVbxrjBNdvrT1uFR9sq+Yuc1JbkF8dxMF51tiQF35g0Nqo+UhjmJJg73S/VI9oQtYzd2GnQC8uQxE8Vf4lZpo6ZkvTDQ7om3t/cvsnNCgwX28/TRcJ53unRPmos13iwIcuvtfKlrP5qIY75YvU4U9nmy3+tjqfB1e5CESMxKjKesH0IJTRhEjAyxjQ1HUINP
+|   256 c2:64:ef:ab:b1:9a:1c:87:58:7c:4b:d5:0f:20:46:26 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJtovk1nbfTPnc/1GUqCcdh8XLsFpDxKYJd96BdYGPjEEdZGPKXv5uHnseNe1SzvLZBoYz7KNpPVQ8uShudDnOI=
+|   256 5a:f2:62:92:11:8e:ad:8a:9b:23:82:2d:ad:53:bc:16 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICfVpt7khg8YIghnTYjU1VgqdsCRVz7f1Mi4o4Z45df8
+80/tcp  open  http        syn-ack Apache httpd 2.4.29 ((Ubuntu))
+|_http-title: Billy Joel&#039;s IT Blog &#8211; The IT blog
+| http-robots.txt: 1 disallowed entry 
+|_/wp-admin/
+|_http-favicon: Unknown favicon MD5: D41D8CD98F00B204E9800998ECF8427E
+|_http-generator: WordPress 5.0
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+139/tcp open  netbios-ssn syn-ack Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp open  netbios-ssn syn-ack Samba smbd 4.7.6-Ubuntu (workgroup: WORKGROUP)
+Device type: general purpose|phone
+Running (JUST GUESSING): Linux 5.X|6.X|4.X (96%), Google Android 10.X|11.X|12.X (93%)
+OS CPE: cpe:/o:linux:linux_kernel:5 cpe:/o:linux:linux_kernel:6 cpe:/o:linux:linux_kernel:4 cpe:/o:google:android:10 cpe:/o:google:android:11 cpe:/o:google:android:12 cpe:/o:linux:linux_kernel:5.4
+OS fingerprint not ideal because: Timing level 5 (Insane) used
+Aggressive OS guesses: Linux 5.14 - 6.8 (96%), Linux 4.15 - 5.19 (96%), Linux 4.15 (96%), Linux 5.4 - 5.15 (96%), Android 10 - 12 (Linux 4.14 - 4.19) (93%), Android 10 - 11 (Linux 4.9 - 4.14) (92%), Android 12 (Linux 5.4) (92%), Android 9 - 11 (Linux 4.9 - 4.14) (92%), Linux 2.6.32 (92%), Linux 2.6.39 - 3.2 (92%)
+No exact OS matches for host (test conditions non-ideal).
+TCP/IP fingerprint:
+SCAN(V=7.99%E=4%D=7/1%OT=22%CT=1%CU=31866%PV=Y%DS=3%DC=T%G=N%TM=6A45B56C%P=x86_64-pc-linux-gnu)
+SEQ(SP=108%GCD=1%ISR=10B%TI=Z%CI=Z%II=I%TS=A)
+SEQ(SP=F9%GCD=1%ISR=10F%TI=Z%CI=Z%II=I%TS=A)
+OPS(O1=M4E8ST11NW7%O2=M4E8ST11NW7%O3=M4E8NNT11NW7%O4=M4E8ST11NW7%O5=M4E8ST11NW7%O6=M4E8ST11)
+WIN(W1=F4B3%W2=F4B3%W3=F4B3%W4=F4B3%W5=F4B3%W6=F4B3)
+ECN(R=Y%DF=Y%T=40%W=F507%O=M4E8NNSNW7%CC=Y%Q=)
+T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)
+T2(R=N)
+T3(R=N)
+T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)
+T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)
+T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)
+T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)
+U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)
+IE(R=Y%DFI=N%T=40%CD=S)
+
+Uptime guess: 16.093 days (since Mon Jun 15 19:34:30 2026)
+Network Distance: 3 hops
+TCP Sequence Prediction: Difficulty=249 (Good luck!)
+IP ID Sequence Generation: All zeros
+Service Info: Host: BLOG; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.7.6-Ubuntu)
+|   Computer name: blog
+|   NetBIOS computer name: BLOG\x00
+|   Domain name: \x00
+|   FQDN: blog
+|_  System time: 2026-07-02T00:48:37+00:00
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| nbstat: NetBIOS name: BLOG, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| Names:
+|   BLOG<00>             Flags: <unique><active>
+|   BLOG<03>             Flags: <unique><active>
+|   BLOG<20>             Flags: <unique><active>
+|   \x01\x02__MSBROWSE__\x02<01>  Flags: <group><active>
+|   WORKGROUP<00>        Flags: <group><active>
+|   WORKGROUP<1d>        Flags: <unique><active>
+|   WORKGROUP<1e>        Flags: <group><active>
+| Statistics:
+|   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+|   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+|_  00 00 00 00 00 00 00 00 00 00 00 00 00 00
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| p2p-conficker: 
+|   Checking for Conficker.C or higher...
+|   Check 1 (port 61402/tcp): CLEAN (Couldn't connect)
+|   Check 2 (port 9492/tcp): CLEAN (Couldn't connect)
+|   Check 3 (port 31452/udp): CLEAN (Failed to receive data)
+|   Check 4 (port 41305/udp): CLEAN (Failed to receive data)
+|_  0/4 checks are positive: Host is CLEAN or ports are blocked
+| smb2-time: 
+|   date: 2026-07-02T00:48:38
+|_  start_date: N/A
+|_clock-skew: mean: -1s, deviation: 0s, median: -1s
+
+TRACEROUTE (using proto 1/icmp)
+HOP RTT       ADDRESS
+1   150.31 ms 192.168.128.1
+2   ...
+3   151.00 ms 10.66.152.41
+
+NSE: Script Post-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 21:48
+Completed NSE at 21:48, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 41.29 seconds
+           Raw packets sent: 62 (4.164KB) | Rcvd: 55 (11.992KB)

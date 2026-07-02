@@ -1,0 +1,86 @@
+===============================================================
+Gobuster v3.8.2
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://blog.thm/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.8.2
+[+] Extensions:              js,php,txt
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+.git/index.php       (Status: 301) [Size: 0] [--> http://blog.thm/.git/]
+.hta                 (Status: 403) [Size: 273]
+.hta.txt             (Status: 403) [Size: 273]
+.hta.php             (Status: 403) [Size: 273]
+.htaccess.php        (Status: 403) [Size: 273]
+.hta.js              (Status: 403) [Size: 273]
+.htaccess            (Status: 403) [Size: 273]
+.htaccess.txt        (Status: 403) [Size: 273]
+.htpasswd.txt        (Status: 403) [Size: 273]
+.htpasswd            (Status: 403) [Size: 273]
+.htpasswd.js         (Status: 403) [Size: 273]
+.htaccess.js         (Status: 403) [Size: 273]
+.htpasswd.php        (Status: 403) [Size: 273]
+0                    (Status: 301) [Size: 0] [--> http://blog.thm/0/]
+2020                 (Status: 301) [Size: 0] [--> http://blog.thm/2020/]
+N                    (Status: 301) [Size: 0] [--> http://blog.thm/2020/05/26/note-from-mom/]
+W                    (Status: 301) [Size: 0] [--> http://blog.thm/2020/05/26/welcome/]
+admin                (Status: 302) [Size: 0] [--> http://blog.thm/wp-admin/]
+atom                 (Status: 301) [Size: 0] [--> http://blog.thm/feed/atom/]
+dashboard            (Status: 302) [Size: 0] [--> http://blog.thm/wp-admin/]
+embed                (Status: 301) [Size: 0] [--> http://blog.thm/embed/]
+favicon.ico          (Status: 200) [Size: 0]
+feed                 (Status: 301) [Size: 0] [--> http://blog.thm/feed/]
+index.php            (Status: 301) [Size: 0] [--> http://blog.thm/]
+index.php            (Status: 301) [Size: 0] [--> http://blog.thm/]
+license.txt          (Status: 200) [Size: 19935]
+login                (Status: 302) [Size: 0] [--> http://blog.thm/wp-login.php]
+n                    (Status: 301) [Size: 0] [--> http://blog.thm/2020/05/26/note-from-mom/]
+no                   (Status: 301) [Size: 0] [--> http://blog.thm/2020/05/26/note-from-mom/]
+note                 (Status: 301) [Size: 0] [--> http://blog.thm/2020/05/26/note-from-mom/]
+page1                (Status: 301) [Size: 0] [--> http://blog.thm/]
+rdf                  (Status: 301) [Size: 0] [--> http://blog.thm/feed/rdf/]
+render/https://www.google.com (Status: 301) [Size: 0] [--> http://blog.thm/render/https:/www.google.com]
+render/https://www.google.com.txt (Status: 301) [Size: 0] [--> http://blog.thm/render/https:/www.google.com.txt]
+render?url=https://www.google.com.php (Status: 301) [Size: 0] [--> http://blog.thm/render%3Furl=https:/www.google.com.php]
+render/https://www.google.com.php (Status: 301) [Size: 0] [--> http://blog.thm/render/https:/www.google.com.php]
+render?url=https://www.google.com.txt (Status: 301) [Size: 0] [--> http://blog.thm/render%3Furl=https:/www.google.com.txt]
+render/https://www.google.com.js (Status: 301) [Size: 0] [--> http://blog.thm/render/https:/www.google.com.js]
+render?url=https://www.google.com.js (Status: 301) [Size: 0] [--> http://blog.thm/render%3Furl=https:/www.google.com.js]
+render?url=https://www.google.com (Status: 301) [Size: 0] [--> http://blog.thm/render%3Furl=https:/www.google.com]
+robots.txt           (Status: 200) [Size: 67]
+robots.txt           (Status: 200) [Size: 67]
+rss2                 (Status: 301) [Size: 0] [--> http://blog.thm/feed/]
+rss                  (Status: 301) [Size: 0] [--> http://blog.thm/feed/]
+server-status        (Status: 403) [Size: 273]
+w                    (Status: 301) [Size: 0] [--> http://blog.thm/2020/05/26/welcome/]
+welcome              (Status: 301) [Size: 0] [--> http://blog.thm/2020/05/26/welcome/]
+wp-admin             (Status: 301) [Size: 307] [--> http://blog.thm/wp-admin/]
+wp-app.php           (Status: 403) [Size: 0]
+wp-atom.php          (Status: 301) [Size: 0] [--> http://blog.thm/feed/atom/]
+wp-commentsrss2.php  (Status: 301) [Size: 0] [--> http://blog.thm/comments/feed/]
+wp-config.php        (Status: 200) [Size: 0]
+wp-content           (Status: 301) [Size: 309] [--> http://blog.thm/wp-content/]
+wp-includes          (Status: 301) [Size: 310] [--> http://blog.thm/wp-includes/]
+wp-cron.php          (Status: 200) [Size: 0]
+wp-load.php          (Status: 200) [Size: 0]
+wp-links-opml.php    (Status: 200) [Size: 233]
+wp-mail.php          (Status: 403) [Size: 2768]
+wp-login.php         (Status: 200) [Size: 3087]
+wp-feed.php          (Status: 301) [Size: 0] [--> http://blog.thm/feed/]
+wp-register.php      (Status: 301) [Size: 0] [--> http://blog.thm/wp-login.php?action=register]
+wp-rdf.php           (Status: 301) [Size: 0] [--> http://blog.thm/feed/rdf/]
+wp-settings.php      (Status: 500) [Size: 0]
+wp-signup.php        (Status: 302) [Size: 0] [--> http://blog.thm/wp-login.php?action=register]
+wp-rss.php           (Status: 301) [Size: 0] [--> http://blog.thm/feed/]
+wp-rss2.php          (Status: 301) [Size: 0] [--> http://blog.thm/feed/]
+xmlrpc.php           (Status: 405) [Size: 42]
+xmlrpc.php           (Status: 405) [Size: 42]
+===============================================================
+Finished
+===============================================================
