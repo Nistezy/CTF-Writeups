@@ -177,32 +177,6 @@ O invasor iniciou o ataque mapeando o serviço HTTP e os compartilhamentos de re
 
 ---
 
-## ⛓ Fluxo do Ataque
-
-[FASE 1 — RECONHECIMENTO]
-Varredura ativa originada de 10.0.2.4 utilizando Nmap Scripting Engine.
-↓
-[FASE 2 — ENUMERAÇÃO]
-Invasor testa mapeamentos SMB no servidor IIS (10.0.2.15).
-Acessa \\10.0.2.15\IPC$ e \\10.0.2.15\Documents.
-↓
-[FASE 3 — ACESSO INICIAL E RCE]
-Upload do web shell malicioso shell.aspx para a raiz do servidor web.
-Execução de comandos no contexto do processo IIS (w3wp.exe - PID 4332).
-↓
-[FASE 4 — CONEXÃO REVERSA]
-O host comprometido inicia uma conexão de reverse shell para o atacante na porta TCP 4443.
-↓
-[FASE 5 — PERSISTÊNCIA & OFUSCAÇÃO]
-O processo w3wp.exe grava o artefato updatenow.exe (ofuscado com UPX)
-diretamente na pasta Startup do Windows.
-↓
-[FASE 6 — COMANDO E CONTROLE (C2)]
-O malware da família Agent Tesla é ativado e passa a realizar beaconing
-para o domínio C2 cp8nl.hyperhost.ua.
-
----
-
 ## ✅ Resumo das Flags
 
 | #  | Pergunta                                                          | Flag / Resposta                                  |
@@ -218,16 +192,6 @@ para o domínio C2 cp8nl.hyperhost.ua.
 | Q9 | Packer utilizado para ofuscar o malware                           | `UPX`                                            |
 | Q10| FQDN do Comando e Controle contatado                              | `cp8nl.hyperhost.ua`                             |
 | Q11| Família do malware RAT                                            | `Agent Tesla`                                    |
-
----
-
-## 🛡 Recomendações
-
-- **Isolamento do Host:** Desconectar imediatamente o servidor afetado (`10.0.2.15`) da rede corporativa para interromper o *beaconing* em direção ao domínio ucraniano e evitar movimentação lateral via SMB.
-- **Remoção de Artefatos:** Expurgar completamente o arquivo `shell.aspx` das pastas públicas do IIS e eliminar o executável persistente `updatenow.exe` do diretório `Startup`.
-- **Bloqueio Perimetral:** Implementar regra de bloqueio (Firewall/Web Proxy) para o domínio malicioso `cp8nl.hyperhost.ua` e restringir comunicações de saída (egress) que não sejam padrão (ex: TCP `4443`).
-- **Revisão de Privilégios do IIS:** Configurar o Application Pool do IIS para operar com o menor privilégio possível (*ApplicationPoolIdentity*) e revogar permissões de gravação/alteração em diretórios sensíveis do sistema ou pastas mapeadas publicamente.
-- **Monitoramento e EDR:** Implementar assinaturas EDR focadas em detectar a injeção ou execução de processos filhos a partir do `w3wp.exe` (comportamento altamente suspeito) e regras YARA para o desempacotamento de artefatos em memória.
 
 ---
 
