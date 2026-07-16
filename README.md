@@ -42,6 +42,7 @@ O conteúdo está organizado da seguinte forma:
 📁 Forensic/
 📁 CTFs/
 📁 Malware/
+📁 OverTheWire/
 ```
 
 Cada diretório contém writeups detalhados com:
