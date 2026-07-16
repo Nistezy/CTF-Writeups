@@ -19,6 +19,7 @@ Todo o conteúdo aqui apresentado tem caráter **educacional**, visando o desenv
 [![CyberDefenders](https://img.shields.io/badge/CyberDefenders-DFIR%20Player-101820?style=for-the-badge)](https://cyberdefenders.org/p/Nistezy/)
 [![VulnHub](https://img.shields.io/badge/VulnHub-Practicing-F26422?style=for-the-badge)](https://www.vulnhub.com/)
 [![PortSwigger](https://img.shields.io/badge/PortSwigger-Web_Security_Academy-FF6633?style=for-the-badge&logo=PortSwigger&logoColor=white)](https://portswigger.net/web-security)
+[![OverTheWire](https://img.shields.io/badge/OverTheWire-Bandit%20Wargames-000000?style=for-the-badge\&logo=gnu-bash\&logoColor=white)](https://overthewire.org/wargames/)
 
 ---
 
