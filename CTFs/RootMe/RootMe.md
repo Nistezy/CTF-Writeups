@@ -61,6 +61,7 @@ TCP Sequence Prediction: Difficulty=263 (Good luck!)
 
 O cookie de sessão **PHPSESSID** foi identificado **sem a flag `httponly`** configurada — uma fraqueza de configuração relevante, ainda que não explorada diretamente nesta cadeia de ataque.
 
+![Nmap](/CTFs/RootMe/images/Nmap_Result.png)
 📸 *Figura 1 — Resultado da varredura Nmap: portas 22 (SSH) e 80 (HTTP) abertas, serviço Apache identificado*
 
 ---
@@ -76,10 +77,12 @@ Can you root me?
 
 Um convite temático típico de máquinas *boot-to-root*, sinalizando diretamente o objetivo do desafio.
 
+![/index](/CTFs/RootMe/images/WebSite_Port_80.png)
 📸 *Figura 2 — Página inicial do serviço web (HackIT - Home) com o desafio "Can you root me?"*
 
 A enumeração manual de diretórios identificou o recurso **`/panel/`**: uma página de **upload de arquivos sem qualquer autenticação**, permitindo — a princípio — o envio de arquivos arbitrários ao servidor.
 
+![/panel](/CTFs/RootMe/images/Vunerable_Url_for_up_Shell.png)
 📸 *Figura 3 — Formulário de upload de arquivos encontrado em `/panel/`, sem validação de tipo de arquivo*
 
 ---
@@ -97,7 +100,7 @@ No encoder specified, outputting raw payload
 Payload size: 2615 bytes
 Saved as: shell.php
 ```
-
+![Exploit Creation](/CTFs/RootMe/images/Payload_Used_for_Shell.png)
 📸 *Figura 4 — Geração do payload PHP reverse shell com Msfvenom, salvo como `shell.php`*
 
 A primeira tentativa de upload do arquivo com a extensão **`.php`** foi bloqueada pelo filtro de validação do formulário em `/panel/`. Para contornar a restrição, o arquivo foi renomeado para **`shell.php5`** — extensão alternativa que o Apache, por padrão, também interpreta como código PHP executável — e o upload foi **aceito com sucesso**, ficando acessível em `http://10.66.155.162/uploads/shell.php5`.
@@ -108,7 +111,7 @@ Com o listener netcat em escuta (`nc -lnvp 4444`), o acesso ao arquivo `shell.ph
 listening on [any] 4444 ...
 connect to [192.168.141.198] from (UNKNOWN) [10.66.155.162] 40710
 ```
-
+![Payload](/CTFs/RootMe/images/Shell_Upload.png)
 📸 *Figura 5 — Bypass do filtro de extensão: arquivo enviado como `shell.php5` (aceito pelo servidor) e conexão reversa recebida no listener netcat*
 
 ---
@@ -132,6 +135,7 @@ THM{y0u_g0t_a_sh3ll}
 
 > 🚩 **user.txt — FLAG CAPTURADA: `THM{y0u_g0t_a_sh3ll}`**
 
+![User](/CTFs/RootMe/images/Find_and_Flag.png)
 📸 *Figura 6 — Shell obtida como `www-data` e localização/captura da flag `user.txt` em `/var/www/user.txt`*
 
 ---
@@ -162,6 +166,7 @@ A consulta ao **GTFOBins** (`gtfobins.org/gtfobins/python`) confirmou a técnica
 python -c 'print(open("/path/to/input-file").read())'
 ```
 
+![Enum Priv](/CTFs/RootMe/images/SUID_Privilege_Escalation_Enum.png)
 📸 *Figura 7 — Enumeração de binários SUID via `find`; `/usr/bin/python2.7` identificado como vetor de escalada, consulta ao GTFOBins*
 
 A técnica foi aplicada diretamente sobre o arquivo `/root/root.txt`:
@@ -177,6 +182,7 @@ O conteúdo da flag foi exibido imediatamente, **mesmo sem uma sessão de shell 
 
 > 🚩 **root.txt — FLAG CAPTURADA: `THM{pr1v1l3g3_3sc4l4t10n}`**
 
+![Root](/CTFs/RootMe/images/Root_Flag..png)
 📸 *Figura 8 — Execução do GTFOBins (File read) via `python2.7` SUID, captura do conteúdo de `/root/root.txt`*
 
 ---
@@ -253,19 +259,6 @@ COMPROMETIMENTO TOTAL — leitura arbitrária com privilégios de root
 
 ---
 
-## 🛡 Recomendações
-
-- **Implementar validação rigorosa de tipo de arquivo** no upload: whitelist de extensões e verificação de MIME/conteúdo real, não apenas a extensão informada
-- **Bloquear explicitamente todas as extensões executáveis pelo Apache** (`.php`, `.php3`, `.php4`, `.php5`, `.php7`, `.phtml` etc.), e não apenas `.php`
-- **Armazenar arquivos enviados por usuários fora do webroot**, ou impedir a execução de scripts no diretório de uploads (ex.: via configuração do Apache/`.htaccess`)
-- **Revisar e remover permissões SUID** de interpretadores e binários que permitam execução/leitura arbitrária, como `python2.7`
-- **Princípio do menor privilégio**: nenhum binário interpretado deveria ter o bit SUID habilitado sem necessidade explícita e controlada
-- **Manter o cookie de sessão `PHPSESSID`** com as flags `HttpOnly` e `Secure` habilitadas
-- **Atualizar e substituir dependências legadas**, como o interpretador Python 2.7 — descontinuado desde janeiro de 2020 (EOL)
-- **Exigir autenticação** para acesso a qualquer endpoint de upload de arquivos, como o identificado em `/panel/`
-
----
-
 ## 📚 Referências
 
 - [TryHackMe — RootMe](https://tryhackme.com/room/rrootme)
@@ -276,5 +269,3 @@ COMPROMETIMENTO TOTAL — leitura arbitrária com privilégios de root
 - [MITRE ATT&CK T1548.001 — Abuse Elevation Control Mechanism: Setuid and Setgid](https://attack.mitre.org/techniques/T1548/001/)
 
 ---
-
-*Writeup elaborado por Mauricio Robert — Faculdade Impacta | Julho 2026*
