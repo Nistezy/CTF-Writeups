@@ -38,6 +38,7 @@ Este relatório documenta uma investigação de **OSINT (Open Source Intelligenc
 
 ### FASE 1 — Análise Forense de Metadados EXIF
 
+![Puzzle Image](/CTFs/OhSINT/images/WindowsXP_1551719014755.jpg)
 > **00:24 GMT-3 · ExifTool Online**
 
 A imagem fornecida como ponto de partida do desafio (`WindowsXP_1551719014755.jpg`) foi submetida a uma ferramenta de extração de metadados. A análise do bloco **XMP** revelou:
@@ -56,6 +57,7 @@ XMPToolkit:      Image::ExifTool 11.27
 
 O campo **Copyright** — normalmente preenchido automaticamente por softwares de edição ou pelo próprio autor — expôs diretamente o **nome de usuário**, enquanto as coordenadas GPS embutidas revelaram a **localização geográfica precisa** associada ao dispositivo que capturou a imagem.
 
+![Username e Cordenadas](/CTFs/OhSINT/images/Cat_Icon_Image.png)
 > 🚩 **Username identificado (EXIF/Copyright): `OWoodflint`**
 > 🚩 **Coordenadas GPS (EXIF): `54°17'41.27" N, 2°15'1.33" W`**
 
@@ -83,6 +85,7 @@ https://oliverwoodflint.wordpress.com/
 
 O README revelou, em uma única página, a **cidade de origem** (Londres), o **e-mail de contato** e um link para o **blog pessoal** do autor — o próximo alvo da investigação.
 
+![Email](/CTFs/OhSINT/images/Email.png)
 > 🚩 **E-mail identificado: `OWoodflint@gmail.com`**
 
 ---
@@ -105,6 +108,7 @@ A inspeção do **código-fonte HTML** da página (`view-source:`), no entanto, 
 <p style="color:#ffffff;" class="has-text-color wp-block-paragraph">pennYDr0pper!</p>
 ```
 
+![Password](/CTFs/OhSINT/images/Password_of_He.png)
 > 🚩 **Senha oculta encontrada (blog): `pennYDr0pper!`**
 
 ---
@@ -137,6 +141,7 @@ B4:5D:50:AA:86:41
 
 A pesquisa do BSSID em bancos de dados de geolocalização de redes sem fio confirmou que o endereço MAC pertence a uma rede identificada pelo SSID **`UnileverWiFi`**, localizada na região **central de Londres, Reino Unido** — corroborando a cidade real informada no GitHub e contrastando com a localização de viagem mencionada no blog (Nova York).
 
+![SSID](/CTFs/OhSINT/images/SSID.png)
 > 🚩 **SSID / Localização da rede Wi-Fi: `UnileverWiFi` — Central London, UK**
 
 ---
@@ -162,7 +167,7 @@ revelando os e-mails originais.
 
 Compromised data: Email addresses · Names · Usernames
 ```
-
+![Database Compromised](/CTFs/OhSINT/images/Database_Exposed_if_this_Email.png)
 > 🚩 **Vazamento de dados confirmado: `Gravatar` — Outubro/2020**
 
 ---
