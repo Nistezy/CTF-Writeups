@@ -250,18 +250,6 @@ Compromised data: Email addresses · Names · Usernames
 
 ---
 
-## 🛡 Recomendações
-
-- **Remover metadados EXIF/XMP** (GPS, autor, dispositivo) de imagens antes de publicá-las em redes sociais, blogs ou repositórios públicos
-- **Evitar reutilizar o mesmo nome de usuário** em múltiplas plataformas quando se deseja manter anonimato ou separação entre identidades pessoais e profissionais
-- **Nunca ocultar senhas ou informações sensíveis no código-fonte** de páginas web (texto branco, comentários HTML, atributos ocultos) — o código-fonte é sempre publicamente acessível
-- **Nunca publicar o BSSID, SSID ou qualquer identificador de redes Wi-Fi domésticas** em redes sociais ou plataformas públicas
-- **Utilizar senhas únicas por serviço** e habilitar autenticação multifator, especialmente após a confirmação de vazamentos de dados associados ao e-mail
-- **Monitorar periodicamente o e-mail pessoal** em serviços como Have I Been Pwned para identificar novos vazamentos de dados
-- **Revisar a pegada digital pessoal (digital footprint)** periodicamente, buscando pelo próprio nome, username e e-mail em motores de busca
-
----
-
 ## 📚 Referências
 
 - [TryHackMe — OhSINT](https://tryhackme.com/room/ohsint)
@@ -272,5 +260,3 @@ Compromised data: Email addresses · Names · Usernames
 - [MITRE ATT&CK T1589 — Gather Victim Identity Information](https://attack.mitre.org/techniques/T1589/)
 
 ---
-
-*Writeup elaborado por Mauricio Robert — Faculdade Impacta | Julho 2026*
