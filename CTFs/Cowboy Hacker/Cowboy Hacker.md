@@ -45,7 +45,7 @@ Uma primeira varredura sem privilégios elevados não retornou portas abertas (t
 ```bash
 sudo nmap -A -Pn -n -sC -T4 --min-rate 5000 --max-retries 1 -p- 10.65.150.38
 ```
-
+![Nmap](/CTFs/Cowboy%20Hacker/images/Scan_Nmap.png)
 ```
 21/tcp open  ftp     vsftpd 3.0.5
 | ftp-anon: Anonymous FTP login allowed (FTP code 230)
@@ -55,8 +55,6 @@ sudo nmap -A -Pn -n -sC -T4 --min-rate 5000 --max-retries 1 -p- 10.65.150.38
 ```
 
 O script `ftp-anon` confirmou explicitamente que o **acesso anônimo ao FTP era permitido**, embora a listagem via modo ativo (PASV) tenha sido inicialmente negada — um convite direto para a próxima fase.
-
-![Nmap](/CTFs/Cowboy%20Hacker/images/Scan_Nmap.png)
 
 ---
 
