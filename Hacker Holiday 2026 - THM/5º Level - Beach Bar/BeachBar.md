@@ -51,7 +51,7 @@ sudo nmap -A -sC -Pn -p- 10.67.185.26
 |_Requested resource was /login
 ```
 
-![Nmap](/CTFs/Beach%20Bar/images/Nmap_Scan.png)
+![Nmap](/Hacker%20Holiday%202026%20-%20THM/5º%20Level%20-%20Beach%20Bar/images/Nmap_Scan.png)
 
 A raiz do site redirecionava para `/login` — indicando autenticação obrigatória.
 
@@ -81,7 +81,7 @@ staff note: the demo DJ login is still enabled for the soft opening.
 dj / dj  -- swap this before the season starts (ticket BAR-7)
 -->
 ```
-![Gobuster & Source Code](/CTFs/Beach%20Bar/images/Source_Code%20_Website.png)
+![Gobuster & Source Code](/Hacker%20Holiday%202026%20-%20THM/5º%20Level%20-%20Beach%20Bar/images/Source_Code%20_Website.png)
 > 🚩 **Credencial exposta (comentário HTML): `dj : dj`**
 
 ---
@@ -100,7 +100,7 @@ Set-Cookie: session=eyJ1c2VyIjoiZGoifQ...
 Location: /dashboard
 ```
 
-![Acesso Inicial](/CTFs/Beach%20Bar/images/Export_Playlist.png)
+![Acesso Inicial](/Hacker%20Holiday%202026%20-%20THM/5º%20Level%20-%20Beach%20Bar/images/Export_Playlist.png)
 
 O login foi bem-sucedido, concedendo acesso ao dashboard "Tonight on the floor", com as funcionalidades **Import** e **Export** de playlists do jukebox.
 
@@ -112,7 +112,7 @@ O login foi bem-sucedido, concedendo acesso ao dashboard "Tonight on the floor",
 
 A função **Export** gerou um arquivo `playlist.yml` com a estrutura da playlist atual:
 
-![Exploit](/CTFs/Beach%20Bar/images/Exploit_Playlist.png)
+![Exploit](/Hacker%20Holiday%202026%20-%20THM/6º%20Level%20-%20Overhead%20Breakfest/images/Exploit_Playlist.png)
 
 ```yaml
 # Beach Bar jukebox playlist export
@@ -156,7 +156,7 @@ bartender@tryhackme-2404:/opt/beach-bar/webapp$ whoami
 bartender
 ```
 
-![Acesso Inicial](/CTFs/Beach%20Bar/images/Export_Playlist.png)
+![Acesso Inicial](/Hacker%20Holiday%202026%20-%20THM/5º%20Level%20-%20Beach%20Bar/images/Export_Playlist.png)
 
 ```bash
 cd /home/bartender
@@ -167,7 +167,7 @@ cat user.txt
 THM{y4ml_pl4yl1st_pwns_th3_b34ch}
 ```
 
-![User Flag](/CTFs/Beach%20Bar/images/Passwd_and_User_Flag.png)
+![User Flag](/Hacker%20Holiday%202026%20-%20THM/5º%20Level%20-%20Beach%20Bar/images/Passwd_and_User_Flag.png)
 > 🚩 **user.txt — FLAG CAPTURADA: `THM{y4ml_pl4yl1st_pwns_th3_b34ch}`**
 
 ---
@@ -200,7 +200,7 @@ cat root.txt
 ```
 THM{cr3d3nt14l_r3us3_4t_th3_b34ch_b4r}
 ```
-![Root Flag](/CTFs/Beach%20Bar/images/Priv_Escalation_and_Root_Flag.png)
+![Root Flag](/Hacker%20Holiday%202026%20-%20THM/5º%20Level%20-%20Beach%20Bar/images/Priv_Escalation_and_Root_Flag.png)
 > 🚩 **root.txt — FLAG CAPTURADA: `THM{cr3d3nt14l_r3us3_4t_th3_b34ch_b4r}`**
 
 ---
